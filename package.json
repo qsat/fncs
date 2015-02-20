@@ -1,0 +1,22 @@
+{
+  "name": "fncs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qsat/fncs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qsat/fncs/issues"
+  },
+  "homepage": "https://github.com/qsat/fncs",
+  "dependencies": {
+    "underscore": "^1.8.0"
+  }
+}
