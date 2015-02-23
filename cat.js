@@ -1,5 +1,5 @@
 var _ = require("underscore")
-  , existy = require("existy");
+  , existy = require("./existy");
 
 module.exports = function cat() {
   var head = _.first(arguments);

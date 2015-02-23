@@ -1,10 +1,15 @@
 var _ = require("underscore")
   , gt = require("./gt")
+  , lift = require("./lift")
+  , note = require("./note")
   , zero = require("./zero")
   , visit = require("./visit")
   , isEven = require("./isEven")
+  , actions = require("./actions")
   , partial = require("./partial")
   , partial1 = require("./partial1")
+  , pipeline = require("./pipeline")
+  , construct = require("./construct")
   , validator = require("./validator")
   , condition1 = require("./conditon1")
   , complement = require("./complement");
@@ -85,4 +90,43 @@ function preDepth(fun, ary) {
 postDepth(_.identity, influences);
 preDepth(_.identity, influences);
 
+
+//
+// 8
+//
+
+function sqr(n) { return n*n; }
+function neg(n) { return -n; }
+
+var mSqr2 = lift(sqr)
+  , mNote2 = lift(note, _.identity)
+  , mNeg2 = lift(neg)
+  , negativeSqrAction2 = actions(
+      [mSqr2(), mNote2(), mNeg2()],
+      function(notUsed, state) {
+        return state;
+      }
+    );
+
+console.log( negativeSqrAction2(100) );
+
+var push = lift(function(stack, e) { return construct(e, stack) })
+  , pop = lift(_.first, _.rest)
+  , stackAction = actions([
+      push(1),
+      push(2),
+      pop()
+    ], function(values, state) {
+      return values;
+    });
+
+console.log( stackAction([]) );
+
+pipeline(
+  []
+  , stackAction
+  , _.chain
+  ).each( function( e ){
+    console.log(e);
+});
 
